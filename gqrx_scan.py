@@ -1,10 +1,11 @@
+#!/usr/bin/python
 import telnetlib
 import csv
 import time
 
 class Scanner:
 
-	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=5, signalStrength=-20):
+	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=8, signalStrength=-28):
 		self.host = hostname
 		self.port = port
 		self.directory = directory
@@ -35,7 +36,7 @@ class Scanner:
 				self._set_freq(freq)
 				self._set_mode(self.freqs[freq]['mode'])
 				self._set_squelch(self.signalStrength)
-				time.sleep(1)
+				time.sleep(0.20)
 				if float(self._get_level()) >= self.signalStrength:
 					timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
 					print timenow, freq, self.freqs[freq]['tag']
@@ -89,7 +90,7 @@ class Scanner:
 
 		pass
 
-   	def load(self, freq_csv='freq.csv'):
+   	def load(self, freq_csv='freq_actual.csv'):
    		"""
    		read the csv file with the frequencies & modes
 		in it into a dict{} where keys are the freq and
