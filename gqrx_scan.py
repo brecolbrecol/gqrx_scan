@@ -38,13 +38,13 @@ class Scanner:
 				self._set_mode(self.freqs[freq]['mode'])
 				self._set_squelch(self.signalStrength)
                                 timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
-                                sys.stdout.write(timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + "\r")
+                                sys.stdout.write(timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + "\t\t" + str(self._get_level()) + "/" + str(self.signalStrength) + " dB\r")
                                 sys.stdout.flush()
 				time.sleep(0.2)
 				if float(self._get_level()) >= self.signalStrength:
 					while float(self._get_level()) >= self.signalStrength:
                                             timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
-                                            print timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + " -- esperando " + str(self.waitTime) + "s ..."
+                                            print timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) +  "\t" + str(self._get_level()) + "/" + str(self.signalStrength) + " dB -- esperando " + str(self.waitTime) + "s ..."
 					    time.sleep(self.waitTime)
 
 	def scan_range(self, minfreq, maxfreq, mode, step=500, save = None):
