@@ -124,6 +124,6 @@ class Scanner:
 		return self._update('m')
 
 if __name__ == "__main__":
-	scanner = Scanner(signalStrength=-58)
+	scanner = Scanner(signalStrength=-60)
 	scanner.load()
 	scanner.scan()
