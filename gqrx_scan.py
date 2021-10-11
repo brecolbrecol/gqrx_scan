@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import telnetlib
 import csv
 import time
 
 class Scanner:
 
-	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=8, signalStrength=-29):
+	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=8, signalStrength=-33):
 		self.host = hostname
 		self.port = port
 		self.directory = directory
@@ -124,6 +124,6 @@ class Scanner:
 		return self._update('m')
 
 if __name__ == "__main__":
-	scanner = Scanner()
+	scanner = Scanner(signalStrength=-58)
 	scanner.load()
 	scanner.scan()
