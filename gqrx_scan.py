@@ -2,10 +2,11 @@
 import telnetlib
 import csv
 import time
+import sys
 
 class Scanner:
 
-	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=8, signalStrength=-33):
+	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=4, signalStrength=-33):
 		self.host = hostname
 		self.port = port
 		self.directory = directory
@@ -36,13 +37,15 @@ class Scanner:
 				self._set_freq(freq)
 				self._set_mode(self.freqs[freq]['mode'])
 				self._set_squelch(self.signalStrength)
-				time.sleep(0.20)
+                                timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
+                                sys.stdout.write(timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + "\r")
+                                sys.stdout.flush()
+				time.sleep(0.2)
 				if float(self._get_level()) >= self.signalStrength:
-					timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
-					#print timenow, freq, self.freqs[freq]['tag']
 					while float(self._get_level()) >= self.signalStrength:
-                                                print timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + " -- esperando " + str(self.waitTime) + "s ..."
-						time.sleep(self.waitTime)
+                                            timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
+                                            print timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + " -- esperando " + str(self.waitTime) + "s ..."
+					    time.sleep(self.waitTime)
 
 	def scan_range(self, minfreq, maxfreq, mode, step=500, save = None):
 		"""
@@ -124,6 +127,6 @@ class Scanner:
 		return self._update('m')
 
 if __name__ == "__main__":
-	scanner = Scanner(signalStrength=-60)
+	scanner = Scanner(signalStrength=-58)
 	scanner.load()
 	scanner.scan()
