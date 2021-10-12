@@ -40,8 +40,9 @@ class Scanner:
                                 timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
                                 sys.stdout.write(timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) + "\t\t" + str(self._get_level()) + "/" + str(self.signalStrength) + " dB\r")
                                 sys.stdout.flush()
-				time.sleep(0.2)
+				time.sleep(0.02)
 				if float(self._get_level()) >= self.signalStrength:
+				        time.sleep(0.2)
 					while float(self._get_level()) >= self.signalStrength:
                                             timenow = str(time.localtime().tm_hour) + ':' + str(time.localtime().tm_min)
                                             print timenow + " " + str(freq) + " " + str(self.freqs[freq]['tag']) +  "\t" + str(self._get_level()) + "/" + str(self.signalStrength) + " dB -- esperando " + str(self.waitTime) + "s ..."
