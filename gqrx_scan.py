@@ -6,7 +6,7 @@ import sys
 
 class Scanner:
 
-	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=4, signalStrength=-33):
+	def __init__(self, hostname='127.0.0.1', port=7356, directory='/', waitTime=6, signalStrength=-33):
 		self.host = hostname
 		self.port = port
 		self.directory = directory
