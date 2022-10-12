@@ -25,4 +25,4 @@ then
 	ls -o $freq_actual
 fi
 
-python gqrx_scan.py
+python2 gqrx_scan.py
